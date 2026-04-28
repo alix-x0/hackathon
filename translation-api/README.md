@@ -203,10 +203,8 @@ Risk labels:
 
 | Problem | Fix |
 |---|---|
-| `GEMINI_API_KEY is not set` | Make sure `.env` exists and has your key |
 | `ModuleNotFoundError` | Run `pip install -r requirements.txt` with venv active |
 | Translation is in MSA (فصحى) not Darija | The prompt is tuned for Darija — if results feel off, open `translator.py` and adjust `SYSTEM_PROMPT` |
-| Slow responses | Normal — Gemini Flash averages ~2s per call |
 | API server won't start | Make sure you're running from the `src/` folder: `cd src && python api.py` |
 
 ---
