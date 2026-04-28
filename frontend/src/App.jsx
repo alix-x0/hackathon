@@ -14,6 +14,8 @@ import Profile from "@/pages/Profile";
 import Settings from "@/pages/Settings";
 import DashboardLayout from "@/components/layout/DashboardLayout";
 import Dashboard from "@/pages/Dashboard";
+import Interactions from "@/pages/Interactions";
+
 
 function App() {
   const location = useLocation();
@@ -27,11 +29,13 @@ function App() {
         <div className="flex flex-col min-h-screen bg-background text-foreground tracking-tight">
           {!hideNavFooter && <Navbar />}
           {!hideNavFooter && <div className="h-16"></div>}
-          
+
           <main className={!isDashboardPage ? "flex-1" : "flex flex-col min-h-screen"}>
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/interactions" element={<Interactions />} />
               <Route path="/about" element={<AboutUs />} />
+
               <Route
                 path="/profile"
                 element={
@@ -51,7 +55,7 @@ function App() {
                 }
               />
               <Route path="/logout" element={<Logout />} />
-              
+
               {/* Dashboard Routes */}
               <Route path="/dashboard" element={<ProtectedRoute><DashboardLayout /></ProtectedRoute>}>
                 <Route index element={<Dashboard />} />

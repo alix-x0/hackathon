@@ -1,7 +1,7 @@
 import React from "react";
 import {
     Users, Target, Award, Rocket,
-    ArrowRight, Heart, Brain, Zap, Briefcase, GraduationCap
+    ArrowRight, Heart, Brain, Zap, Briefcase, GraduationCap, ShieldCheck, Activity, Languages, Stethoscope, Search, Sparkles
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -12,33 +12,33 @@ import { Link } from "react-router-dom";
 
 const team = [
     {
-        name: "Dr. Alix Dev",
-        role: "President & Founder",
-        initials: "AD",
-        bio: "Specializing in student career development with 10+ years of educational technology experience.",
-        tag: "Founder"
+        name: "Dr. Amine Mansouri",
+        role: "Chief Medical Officer",
+        initials: "AM",
+        bio: "Pharmacologist with 15 years of experience in clinical drug safety and patient advocacy.",
+        tag: "Medical Lead"
     },
     {
-        name: "Karim Belkacemi",
-        role: "Tech Lead",
-        initials: "KB",
-        bio: "Passionate about building scalable platforms that connect students with industry leaders.",
-        tag: "Lead Architect"
+        name: "Sarah Benali",
+        role: "Head of AI Engineering",
+        initials: "SB",
+        bio: "Expert in NLP and medical data processing, dedicated to making clinical data accessible in Darija.",
+        tag: "Tech Lead"
     },
     {
-        name: "Lydia Mensouri",
-        role: "Partnerships Manager",
-        initials: "LM",
-        bio: "Ensuring world-class connections between top companies and Algerian universities.",
+        name: "Reda Belkacem",
+        role: "Pharmacist Relations",
+        initials: "RB",
+        bio: "Ensuring MedSafe integrates seamlessly into the daily workflow of Algerian community pharmacies.",
         tag: "Operations"
     }
 ];
 
 const stats = [
-    { label: "Active Internships", value: "250+", icon: Briefcase },
-    { label: "Verified Students", value: "15k+", icon: GraduationCap },
-    { label: "Partner Companies", value: "100+", icon: Rocket },
-    { label: "Match Rate", value: "92%", icon: Zap }
+    { label: "Active Users", value: "250+", icon: Briefcase },
+    { label: "Verified Records", value: "236k+", icon: ShieldCheck },
+    { label: "Partner Pharmacies", value: "100+", icon: Rocket },
+    { label: "Safety Rate", value: "99%", icon: Zap }
 ];
 
 export default function AboutUs() {
@@ -51,13 +51,13 @@ export default function AboutUs() {
                     <Badge variant="outline" className="text-primary border-primary/30 mb-6 px-4 py-1 bg-primary/10">
                         Our Story
                     </Badge>
-                    <h1 className="text-4xl md:text-6xl font-black text-white mb-8 tracking-tight">
-                        Empowering the next <br />
-                        <span className="text-primary italic">Professionals.</span>
+                    <h1 className="text-4xl md:text-6xl font-bold text-white mb-8 tracking-tight">
+                        Empowering medication <br />
+                        <span className="text-primary italic text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-400">Safety.</span>
                     </h1>
                     <p className="text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed">
-                        Inter.Ship is more than just a platform—it's a bridge between ambition and achievement,
-                        connecting Algeria's brightest students with the nation's leading enterprises.
+                        MedSafe is more than just a platform—it's a bridge between medical data and patient safety,
+                        connecting clinical records with Algerian families in their native language.
                     </p>
                 </div>
             </section>
@@ -73,7 +73,7 @@ export default function AboutUs() {
                                         <stat.icon className="h-6 w-6 text-white" />
                                     </div>
                                 </div>
-                                <div className="text-3xl font-black text-white mb-1 tracking-tighter">{stat.value}</div>
+                                <div className="text-3xl font-bold text-white mb-1 tracking-tighter">{stat.value}</div>
                                 <div className="text-primary-foreground/70 text-[10px] font-bold uppercase tracking-widest">{stat.label}</div>
                             </div>
                         ))}
@@ -86,39 +86,39 @@ export default function AboutUs() {
                 <div className="max-w-7xl mx-auto px-6">
                     <div className="grid md:grid-cols-2 gap-12">
                         <div className="space-y-6">
-                            <h2 className="text-3xl font-black text-slate-900 tracking-tight flex items-center gap-3">
+                            <h2 className="text-3xl font-bold text-slate-900 tracking-tight flex items-center gap-3">
                                 <Target className="text-primary" />
                                 Our Mission
                             </h2>
                             <p className="text-lg text-slate-600 leading-relaxed font-medium">
-                                Inter.Ship was founded in 2025 with a singular focus: to modernize how students
-                                start their professional journey in Algeria. We provide a centralized, smart platform
-                                for students to discover high-value internships and for companies to find the next generation of leaders.
+                                MedSafe was founded with a singular focus: to modernize how drug interactions
+                                are handled in Algeria. We provide a centralized, smart platform
+                                for patients to discover safety risks and for pharmacists to validate treatments.
                             </p>
                             <Separator className="bg-slate-200" />
                             <div className="grid grid-cols-2 gap-6">
                                 <div className="space-y-2">
                                     <div className="h-2 w-12 bg-primary rounded-full" />
-                                    <p className="font-black text-slate-900 uppercase text-xs tracking-widest">Accessibility</p>
-                                    <p className="text-sm text-slate-500">Connecting talent from all 58 provinces to top enterprises.</p>
+                                    <p className="font-bold text-slate-900 uppercase text-xs tracking-widest">Accessibility</p>
+                                    <p className="text-sm text-slate-500">Connecting talent from all 58 provinces to medical safety.</p>
                                 </div>
                                 <div className="space-y-2">
                                     <div className="h-2 w-12 bg-slate-400 rounded-full" />
-                                    <p className="font-black text-slate-900 uppercase text-xs tracking-widest">Innovation</p>
-                                    <p className="text-sm text-slate-500">Using smart algorithms to ensure the perfect candidate-role match.</p>
+                                    <p className="font-bold text-slate-900 uppercase text-xs tracking-widest">Innovation</p>
+                                    <p className="text-sm text-slate-500">Using smart algorithms to ensure the perfect safety check.</p>
                                 </div>
                             </div>
                         </div>
 
                         <div className="relative rounded-[2.5rem] overflow-hidden bg-slate-900 p-12 flex flex-col justify-center text-white min-h-[400px] shadow-2xl">
                             <div className="absolute top-0 right-0 p-8 opacity-10">
-                                <Rocket size={120} className="text-primary" />
+                                <Stethoscope size={120} className="text-primary" />
                             </div>
-                            <h2 className="text-3xl font-black mb-6 tracking-tight">Our Vision</h2>
+                            <h2 className="text-3xl font-bold mb-6 tracking-tight">Our Vision</h2>
                             <p className="text-lg text-slate-400 mb-8 leading-relaxed italic">
-                                "To become the definitive career launchpad for the African Mediterranean region,
-                                ensuring every motivated student has a clear path to professional excellence
-                                through impactful real-world experience."
+                                "To become the definitive medical safety launchpad for Algeria,
+                                ensuring every patient has a clear path to health excellence
+                                through native-language digital tools."
                             </p>
                             <div className="flex items-center gap-4">
                                 <div className="h-10 w-10 rounded-full border border-white/20 flex items-center justify-center">
@@ -131,44 +131,46 @@ export default function AboutUs() {
                 </div>
             </section>
 
-            {/* Team Section */}
+            {/* Team Section — CLEANER VERSION */}
             <section className="py-24">
                 <div className="max-w-7xl mx-auto px-6">
                     <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
                         <div className="space-y-4">
-                            <h2 className="text-4xl font-black text-slate-900 tracking-tight">The Makers of Inter.Ship</h2>
+                            <h2 className="text-4xl font-bold text-slate-900 tracking-tight">The Makers of MedSafe</h2>
                             <p className="text-slate-500 text-lg max-w-xl font-medium">
-                                Our diverse team combines educational expertise with world-class engineering
-                                to build a platform that truly serves the future of Algerian talent.
+                                Our diverse team combines medical expertise with world-class engineering
+                                to build a platform that truly serves the health of all Algerians.
                             </p>
                         </div>
-                        <Button variant="outline" className="rounded-full font-bold px-8 group border-slate-200 shadow-none">
-                            Join Our Mission
-                            <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                        </Button>
+                        <Link to="/register">
+                            <Button variant="outline" className="rounded-full font-bold px-8 group border-slate-200 shadow-none">
+                                Join Our Mission
+                                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                            </Button>
+                        </Link>
                     </div>
 
                     <div className="grid md:grid-cols-3 gap-8">
                         {team.map((member, i) => (
-                            <Card key={i} className="border-none shadow-2xl shadow-slate-200/60 hover:-translate-y-2 transition-all duration-300 rounded-[2.5rem] group overflow-hidden bg-white">
-                                <CardHeader className="p-8 pb-4">
-                                    <Avatar className="h-20 w-20 mb-6 ring-4 ring-offset-4 ring-primary/10">
-                                        <AvatarImage src="" />
-                                        <AvatarFallback className="bg-slate-900 text-white font-black text-xl tracking-tighter">
+                            <Card key={i} className="border border-slate-100 shadow-sm hover:shadow-md transition-shadow duration-300 rounded-3xl bg-white overflow-hidden">
+                                <CardHeader className="p-10 pb-4">
+                                    <Avatar className="h-20 w-20 mb-6">
+                                        <AvatarFallback className="bg-primary/10 text-primary font-bold text-2xl tracking-tighter">
                                             {member.initials}
                                         </AvatarFallback>
                                     </Avatar>
                                     <div className="space-y-1">
-                                        <Badge variant="secondary" className="bg-primary/10 text-primary border-none px-3 font-bold text-[10px] mb-2 uppercase tracking-widest">
+                                        <Badge variant="secondary" className="bg-slate-100 text-slate-600 border-none px-3 font-bold text-[10px] mb-2 uppercase tracking-widest">
                                             {member.tag}
                                         </Badge>
-                                        <CardTitle className="text-xl font-black text-slate-900 tracking-tight">{member.name}</CardTitle>
+                                        <CardTitle className="text-xl font-bold text-slate-900 tracking-tight">{member.name}</CardTitle>
                                         <CardDescription className="text-primary font-bold text-xs uppercase tracking-widest">
                                             {member.role}
                                         </CardDescription>
                                     </div>
                                 </CardHeader>
-                                <CardContent className="p-8 pt-2">
+                                <CardContent className="p-10 pt-2">
+                                    <Separator className="mb-8 opacity-50" />
                                     <p className="text-slate-500 leading-relaxed text-sm italic font-medium">
                                         "{member.bio}"
                                     </p>
@@ -181,27 +183,26 @@ export default function AboutUs() {
 
             {/* Final CTA */}
             <section className="py-24 max-w-7xl mx-auto px-6">
-                <div className="bg-slate-900 rounded-[3.5rem] p-12 md:p-24 text-center text-white relative overflow-hidden shadow-2xl shadow-primary/20">
-                    <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
-                        <div className="absolute -top-1/2 -left-1/4 w-full h-full bg-primary rounded-full blur-[140px]" />
-                    </div>
-                    <h2 className="text-4xl md:text-5xl font-black mb-8 relative z-10 tracking-tighter">
-                        Ready to launch your career?
-                    </h2>
-                    <p className="text-slate-400 text-xl mb-12 max-w-2xl mx-auto relative z-10 leading-relaxed font-medium">
-                        Join the fastest-growing professional community in Algeria and start your journey today.
-                    </p>
-                    <div className="flex flex-wrap justify-center gap-6 relative z-10">
-                        <Link to="/register">
-                            <Button size="lg" className="bg-primary hover:bg-primary/90 text-white px-10 h-14 rounded-full font-black text-lg shadow-xl shadow-primary/30 transition-all active:scale-95 border-none">
-                                Get Started Now
-                            </Button>
-                        </Link>
-                        <Link to="/contact">
-                            <Button variant="outline" size="lg" className="border-white/20 bg-transparent text-white hover:bg-white/10 px-10 h-14 rounded-full font-black text-lg transition-all active:scale-95">
-                                Contact Us
-                            </Button>
-                        </Link>
+                <div className="bg-slate-900 rounded-[3rem] p-12 md:p-20 text-center text-white relative overflow-hidden shadow-xl border border-white/5">
+                    <div className="relative z-10">
+                        <h2 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">
+                            Ready to check your medications?
+                        </h2>
+                        <p className="text-slate-400 text-lg mb-10 max-w-xl mx-auto leading-relaxed">
+                            Join the fastest-growing health safety community in Algeria and protect your family today.
+                        </p>
+                        <div className="flex flex-wrap justify-center gap-4">
+                            <Link to="/interactions">
+                                <Button size="lg" className="bg-primary hover:bg-primary/90 text-white px-8 h-13 rounded-xl font-bold shadow-lg shadow-primary/20 transition-all active:scale-95">
+                                    Check Interactions
+                                </Button>
+                            </Link>
+                            <Link to="/register">
+                                <Button variant="outline" size="lg" className="border-white/20 bg-white/5 text-white hover:bg-white/10 px-8 h-13 rounded-xl font-bold transition-all active:scale-95">
+                                    Join MedSafe
+                                </Button>
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </section>

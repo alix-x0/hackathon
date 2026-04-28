@@ -11,7 +11,9 @@ function Register() {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [role, setRole] = useState("PATIENT");
     const [showPw, setShowPw] = useState(false);
+
     const [loading, setLoading] = useState(false);
     const [errors, setErrors] = useState({});
     const navigate = useNavigate();
@@ -32,8 +34,9 @@ function Register() {
         setErrors({});
         setLoading(true);
         try {
-            await api.post("/auth/register/", { username, email, password });
+            await api.post("/auth/register/", { username, email, password, role });
             navigate("/login");
+
         } catch (error) {
             if (error.response && error.response.data) {
                 const backendErrors = error.response.data;
@@ -59,8 +62,9 @@ function Register() {
                         <Layout className="w-6 h-6" />
                     </div>
                     <span className="text-xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
-                        Template
+                        MedSafe
                     </span>
+
                 </Link>
             </div>
 
@@ -72,7 +76,7 @@ function Register() {
                         Enter your details below to create your account
                     </CardDescription>
                 </CardHeader>
-                
+
                 <CardContent className="p-8 pt-6">
                     <form onSubmit={handleSubmit} className="space-y-4">
                         <div className="space-y-2">
@@ -130,6 +134,28 @@ function Register() {
                             {errors.password && <p className="text-xs text-red-500 mt-1">{errors.password}</p>}
                         </div>
 
+                        <div className="space-y-2 py-2">
+                            <Label className="text-sm font-medium">Register as</Label>
+                            <div className="grid grid-cols-2 gap-4">
+                                <Button
+                                    type="button"
+                                    variant={role === "PATIENT" ? "default" : "outline"}
+                                    onClick={() => setRole("PATIENT")}
+                                    className={`w-full h-10 font-bold ${role === 'PATIENT' ? 'bg-primary text-white' : ''}`}
+                                >
+                                    Patient
+                                </Button>
+                                <Button
+                                    type="button"
+                                    variant={role === "PHARMACIST" ? "default" : "outline"}
+                                    onClick={() => setRole("PHARMACIST")}
+                                    className={`w-full h-10 font-bold ${role === 'PHARMACIST' ? 'bg-primary text-white' : ''}`}
+                                >
+                                    Pharmacist
+                                </Button>
+                            </div>
+                        </div>
+
                         <Button
                             type="submit"
                             disabled={loading}
@@ -161,7 +187,8 @@ function Register() {
 
             {/* ─── Simple Footer ─── */}
             <div className="mt-8 text-center text-xs text-zinc-400 dark:text-zinc-600">
-                © 2026 Template Platform. All rights reserved.
+                © 2026 MedSafe. All rights reserved.
+
             </div>
         </div>
     );

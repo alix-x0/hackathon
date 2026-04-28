@@ -1,10 +1,10 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import User, Student, Company, Administrator
+from .models import User, Patient, Pharmacist, Administrator
 
 class CustomUserAdmin(UserAdmin):
     fieldsets = UserAdmin.fieldsets + (
-        (None, {'fields': ('role', 'biography', 'profile_picture')}),
+        (None, {'fields': ('role', 'profile_picture')}),
     )
     add_fieldsets = UserAdmin.add_fieldsets + (
         (None, {'fields': ('role',)}),
@@ -13,8 +13,8 @@ class CustomUserAdmin(UserAdmin):
     list_filter = ['role', 'is_staff', 'is_superuser']
 
 admin.site.register(User, CustomUserAdmin)
-admin.site.register(Student)
-admin.site.register(Company)
+admin.site.register(Patient)
+admin.site.register(Pharmacist)
 admin.site.register(Administrator)
 
 

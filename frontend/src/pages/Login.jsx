@@ -53,8 +53,9 @@ function Login() {
                         <Layout className="w-6 h-6" />
                     </div>
                     <span className="text-xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
-                        Template
+                        MedSafe
                     </span>
+
                 </Link>
             </div>
 
@@ -66,7 +67,7 @@ function Login() {
                         Enter your email and password to sign in
                     </CardDescription>
                 </CardHeader>
-                
+
                 <CardContent className="p-8 pt-6">
                     <form onSubmit={handleSubmit} className="space-y-4">
                         <div className="space-y-2">
@@ -148,7 +149,8 @@ function Login() {
 
             {/* ─── Simple Footer ─── */}
             <div className="mt-8 text-center text-xs text-zinc-400 dark:text-zinc-600">
-                © 2026 Template Platform. All rights reserved.
+                © 2026 MedSafe. All rights reserved.
+
             </div>
 
             {/* Forgot Password Modal */}

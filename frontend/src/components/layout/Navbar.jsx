@@ -58,11 +58,10 @@ export default function Navbar() {
 
     const navLinks = [
         { name: "Home", path: "/" },
-        { name: "Templates", path: "/templates" },
-        { name: "Companies", path: "/companies" },
-        { name: "Applications", path: "/applications" },
+        { name: "Interactions", path: "/interactions" },
         { name: "About Us", path: "/about" },
     ];
+
 
     return (
         <nav className="fixed top-0 left-0 right-0 z-[100] bg-white border-b border-slate-100 shadow-sm">
@@ -114,8 +113,9 @@ export default function Navbar() {
                                     <div className="text-left hidden lg:block pr-1">
                                         <p className="text-xs font-semibold text-slate-900 leading-none mb-1">{userInfo.username}</p>
                                         <p className="text-[10px] text-primary font-medium">
-                                            {userInfo.role === 'company' ? 'Company' : userInfo.role?.replace('_', ' ')}
+                                            {userInfo.role?.charAt(0).toUpperCase() + userInfo.role?.slice(1).toLowerCase().replace('_', ' ')}
                                         </p>
+
                                     </div>
                                     <ChevronDown className="h-3 w-3 text-slate-400 group-hover:text-primary transition-colors" />
                                 </Button>

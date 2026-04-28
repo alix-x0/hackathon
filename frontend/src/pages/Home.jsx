@@ -49,19 +49,20 @@ function Home() {
                             variants={fade} initial="hidden" animate="show" custom={2}
                             className="flex flex-col sm:flex-row justify-center gap-3"
                         >
-                            <Link to="/check">
+                            <Link to="/interactions">
                                 <Button size="lg" className="h-12 px-7 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-base shadow-lg transition-all hover:scale-[1.02] group">
                                     Check Interactions
                                     <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
                                 </Button>
                             </Link>
-                            <Link to="/pharmacist">
-                                <Button size="lg" className="h-12 px-7 rounded-xl bg-white text-slate-900 font-semibold text-base hover:bg-white/90 shadow-sm border border-slate-100">
+                            <Link to="/register">
+                                <Button size="lg" className="h-12 px-7 rounded-xl bg-white text-slate-900 font-semibold text-base hover:bg-white/90 shadow-sm border border-slate-100 transition-all hover:scale-[1.02]">
                                     <Stethoscope className="mr-2 w-4 h-4 text-slate-500" />
-                                    Pharmacist Portal
+                                    Join MedSafe
                                 </Button>
                             </Link>
                         </motion.div>
+
                     </div>
                 </div>
             </section>
@@ -301,30 +302,34 @@ function Home() {
 
             {/* ────────────── CTA ────────────── */}
             <section className="relative h-[700px] flex items-center overflow-hidden">
-                <div 
-                    className="absolute inset-0 bg-cover bg-center" 
-                    style={{ 
+                <div
+                    className="absolute inset-0 bg-cover bg-center"
+                    style={{
                         backgroundImage: `url(${imgGlovesHeart})`,
-                        backgroundPosition: 'center' 
-                    }} 
+                        backgroundPosition: 'center'
+                    }}
                 />
                 <div className="absolute inset-0 bg-black/50" />
-                
+
                 <div className="relative z-10 w-full">
-                    <div className="max-w-3xl mx-auto px-6 text-center">
-                        <ShieldCheck className="w-10 h-10 text-white mx-auto mb-6" />
-                        <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight mb-5">
-                            Stop guessing. Start verifying.
+                    <div className="max-w-4xl mx-auto text-center px-6">
+                        <h2 className="text-3xl md:text-5xl font-bold text-white mb-8">
+                            Ready to check your medications?
                         </h2>
-                        <p className="text-lg text-white/70 mb-10 max-w-xl mx-auto leading-relaxed">
-                            MedSafe is free for patients and built for Algerian pharmacists. Check your first interaction in under 30 seconds.
-                        </p>
-                        <Link to="/check">
-                            <Button size="lg" className="h-13 px-10 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-base shadow-lg transition-all hover:scale-[1.02]">
-                                Try MedSafe Now
-                                <ChevronRight className="ml-1 w-4 h-4" />
-                            </Button>
-                        </Link>
+                        <div className="flex flex-col sm:flex-row justify-center gap-4">
+                            <Link to="/interactions">
+                                <Button size="lg" className="h-13 px-10 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-base shadow-lg transition-all hover:scale-[1.02]">
+                                    Try MedSafe Now
+                                    <ChevronRight className="ml-1 w-4 h-4" />
+                                </Button>
+                            </Link>
+                            <Link to="/register">
+                                <Button size="lg" className="h-13 px-10 rounded-xl bg-white/10 hover:bg-white/20 text-white font-semibold text-base backdrop-blur-md border border-white/30 transition-all hover:scale-[1.02]">
+                                    Create Account
+                                </Button>
+                            </Link>
+                        </div>
+
                     </div>
                 </div>
             </section>
