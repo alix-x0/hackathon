@@ -12,5 +12,9 @@ urlpatterns = [
 
     # Users
     path('users/', UserListView.as_view(), name='user-list'),
+
+    # Drugs & Interactions
+    path('drugs/', DrugListView.as_view(), name='drug-list'),
+    path('interactions/analyze/', analyze_interactions, name='analyze-interactions'),
 ]
    
