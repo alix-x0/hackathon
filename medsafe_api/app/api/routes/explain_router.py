@@ -9,11 +9,11 @@ from BioMistral, with Algerian Darija translations.
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
 import asyncio
-from typing import List, Optional
+from typing import List, Optional, Literal
 import logging
 
 from app.services.biomistral_service import generate_explanation
-from app.services.translation_service import translate_to_darija
+from app.services.translation_service import translate_to_darija, translate_to_french
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/explain", tags=["Explanation"])
@@ -38,6 +38,7 @@ class ExplainRequest(BaseModel):
     """
     drugs_submitted: List[str] = Field(default_factory=list)
     pairs: List[InteractionPair]
+    user_role: Literal["patient", "pharmacist"] = Field("pharmacist", description="The role of the user requesting the explanation")
 
 
 class PairExplanation(BaseModel):
@@ -48,6 +49,7 @@ class PairExplanation(BaseModel):
     color: Optional[str] = None
     medical_explanation: str
     darija_explanation: Optional[str] = None
+    french_explanation: Optional[str] = None
     darija_risk_label: Optional[str] = None
     translation_success: Optional[bool] = None
     translation_error: Optional[str] = None
@@ -73,6 +75,7 @@ async def explain_interactions(body: ExplainRequest) -> ExplainResponse:
         raise HTTPException(status_code=400, detail="No interaction pairs provided.")
 
     partial_results = []
+    logger.info("Explaining interactions for role: %s", body.user_role)
 
     for pair in body.pairs:
         if pair.level in ("UNKNOWN", "NOT_IN_DB"):
@@ -87,13 +90,16 @@ async def explain_interactions(body: ExplainRequest) -> ExplainResponse:
                     drug_b=pair.drug_b,
                     level=pair.level,
                     original_level=pair.original_level or pair.level.capitalize(),
+                    role=body.user_role,
                 )
             except Exception as exc:
+                import traceback
                 logger.error(
-                    "BioMistral inference failed for %s+%s: %s",
+                    "BioMistral inference failed for %s+%s: %s\n%s",
                     pair.drug_a,
                     pair.drug_b,
                     exc,
+                    traceback.format_exc()
                 )
                 explanation = _fallback_explanation(pair.level)
 
@@ -102,7 +108,13 @@ async def explain_interactions(body: ExplainRequest) -> ExplainResponse:
     async def _translate_item(item: dict) -> PairExplanation:
         pair = item["pair"]
         eng_exp = item["explanation"]
-        trans = await translate_to_darija(eng_exp, pair.level)
+        
+        # Parallel translation
+        darija_task = translate_to_darija(eng_exp, pair.level)
+        french_task = translate_to_french(eng_exp)
+        
+        darija_res, french_res = await asyncio.gather(darija_task, french_task)
+        
         return PairExplanation(
             drug_a=pair.drug_a,
             drug_b=pair.drug_b,
@@ -110,10 +122,11 @@ async def explain_interactions(body: ExplainRequest) -> ExplainResponse:
             original_level=pair.original_level,
             color=pair.color,
             medical_explanation=eng_exp,
-            darija_explanation=trans["darija_text"],
-            darija_risk_label=trans["risk_label"],
-            translation_success=trans["success"],
-            translation_error=trans["error"],
+            darija_explanation=darija_res["darija_text"],
+            french_explanation=french_res["french_text"],
+            darija_risk_label=darija_res["risk_label"],
+            translation_success=darija_res["success"],
+            translation_error=darija_res["error"],
         )
 
     tasks = [_translate_item(item) for item in partial_results]

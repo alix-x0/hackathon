@@ -49,7 +49,6 @@ class Command(BaseCommand):
                         continue
                     
                     drug = Drug(
-                        n=n_val,
                         registration_number=reg_num,
                         code=code,
                         generic_name=generic,

@@ -50,3 +50,19 @@ class Drug(models.Model):
     def __str__(self):
         return f"{self.brand_name} ({self.generic_name})"
 
+
+class MedicationProfile(models.Model):
+    """A saved medication in the user's long-term profile."""
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='medication_profile')
+    drug = models.ForeignKey(Drug, on_delete=models.CASCADE)
+    added_at = models.DateTimeField(auto_now_add=True)
+    notes = models.CharField(max_length=255, blank=True, default='')
+
+    class Meta:
+        unique_together = ('user', 'drug')
+        ordering = ['-added_at']
+
+    def __str__(self):
+        return f"{self.user.username} - {self.drug.brand_name}"
+
+
