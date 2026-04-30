@@ -3,19 +3,15 @@
 import * as React from "react"
 import { useNavigate } from "react-router-dom"
 import {
-  BookOpen,
-  Bot,
-  Command,
-  Frame,
   GalleryVerticalEnd,
   LayoutDashboard,
-  Map,
-  PieChart,
   Settings2,
-  SquareTerminal,
-  Building2,
-  Users,
   Search,
+  Stethoscope,
+  Activity,
+  ShieldCheck,
+  FileText,
+  Database,
 } from "lucide-react"
 
 import { NavMain } from "@/components/layout/nav-main"
@@ -38,14 +34,9 @@ import { Input } from "@/components/ui/input"
 const data = {
   teams: [
     {
-      name: "Template",
-      logo: GalleryVerticalEnd,
-      plan: "Platform Admin",
-    },
-    {
-      name: "Acme Corp",
-      logo: Building2,
-      plan: "Hiring Partner",
+      name: "MedSafe",
+      logo: ShieldCheck,
+      plan: "Clinical Platform",
     },
   ],
   navMain: [
@@ -61,59 +52,43 @@ const data = {
         },
         {
           title: "Analytics",
-          url: "/companydashboard/analytics",
+          url: "/dashboard/analytics",
         },
       ],
     },
     {
-      title: "Internships",
-      url: "/internships",
-      icon: SquareTerminal,
+      title: "Interactions",
+      url: "/interactions",
+      icon: Activity,
       items: [
         {
-          title: "Browse All",
-          url: "/internships",
-        },
-        {
-          title: "My Listings",
-          url: "/companydashboard/listings",
-        },
-        {
-          title: "New Posting",
-          url: "/companydashboard?newOffer=true",
+          title: "Check Interactions",
+          url: "/interactions",
         },
       ],
     },
     {
-      title: "Applications",
-      url: "/applications",
-      icon: Users,
+      title: "Pharmacist Mode",
+      url: "/dashboard/pharmacist",
+      icon: Stethoscope,
       items: [
         {
-          title: "Received",
-          url: "/companydashboard/applications",
-        },
-        {
-          title: "Shortlisted",
-          url: "/companydashboard/applications?status=shortlisted",
+          title: "Clinical Suite",
+          url: "/dashboard/pharmacist",
         },
       ],
     },
     {
-        title: "Platform",
-        url: "#",
-        icon: Settings2,
-        items: [
-          {
-            title: "Settings",
-            url: "/settings",
-          },
-          {
-            title: "Help Center",
-            url: "/help",
-          },
-        ],
-      },
+      title: "Platform",
+      url: "#",
+      icon: Settings2,
+      items: [
+        {
+          title: "Settings",
+          url: "/settings",
+        },
+      ],
+    },
   ],
 }
 

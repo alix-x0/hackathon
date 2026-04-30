@@ -15,6 +15,7 @@ import Settings from "@/pages/Settings";
 import DashboardLayout from "@/components/layout/DashboardLayout";
 import Dashboard from "@/pages/Dashboard";
 import Interactions from "@/pages/Interactions";
+import PharmacistMode from "@/pages/PharmacistMode";
 
 
 function App() {
@@ -60,6 +61,7 @@ function App() {
               <Route path="/dashboard" element={<ProtectedRoute><DashboardLayout /></ProtectedRoute>}>
                 <Route index element={<Dashboard />} />
                 <Route path="analytics" element={<Dashboard />} />
+                <Route path="pharmacist" element={<PharmacistMode />} />
                 <Route path="listings" element={<Dashboard />} />
                 <Route path="applications" element={<Dashboard />} />
               </Route>
@@ -83,4 +85,3 @@ function Logout() {
 }
 
 export default App;
-

@@ -43,6 +43,18 @@ SYSTEM_PROMPT = """
 6. **الملخص فقط** — ما تطوّلش.
 """
 
+FRENCH_SYSTEM_PROMPT = """
+Vous êtes un expert en pharmacologie clinique et en traduction médicale. 
+Traduisez le texte médical suivant en français de manière précise et professionnelle.
+
+**Règles strictes :**
+1. Utilisez un ton professionnel et informatif (langage médical clair).
+2. Ne mentionnez pas de noms de médicaments spécifiques s'ils ne sont pas dans le texte original.
+3. Soyez concis et allez à l'essentiel (mécanismes, risques, précautions).
+4. Ne pas inclure de texte introductif comme "Voici la traduction".
+5. Limitez la réponse à un seul paragraphe court.
+"""
+
 RISK_LABELS = {
     "danger":     "خطر كبير",
     "major":      "خطر كبير",
@@ -117,3 +129,34 @@ async def translate_to_darija(
         "success": False,
         "error": "Translation failed after all retries.",
     }
+
+
+async def translate_to_french(
+    english_text: str,
+    max_retries: int = 3,
+    retry_delay: float = 2.0,
+) -> dict:
+    """
+    Translate an English drug interaction description to Professional French.
+    """
+    if not client:
+        return {"french_text": english_text, "success": False, "error": "OPENAI_API_KEY is not configured."}
+
+    prompt = f"{FRENCH_SYSTEM_PROMPT}\n\nTexte à traduire :\n{english_text.strip()}"
+
+    for attempt in range(1, max_retries + 1):
+        try:
+            response = await client.chat.completions.create(
+                model="gpt-4o-mini",
+                messages=[{"role": "user", "content": prompt}],
+                max_tokens=1000,
+                temperature=0.3,
+            )
+            french = response.choices[0].message.content.strip()
+            return {"french_text": french, "success": True, "error": None}
+        except Exception as exc:
+            logger.warning("French translation attempt %d failed: %s", attempt, exc)
+            if attempt < max_retries:
+                await asyncio.sleep(retry_delay)
+
+    return {"french_text": english_text, "success": False, "error": "Translation failed."}

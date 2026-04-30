@@ -16,5 +16,10 @@ urlpatterns = [
     # Drugs & Interactions
     path('drugs/', DrugListView.as_view(), name='drug-list'),
     path('interactions/analyze/', analyze_interactions, name='analyze-interactions'),
-]
-   
+
+    # Medication Profile
+    path('medication-profile/', MedicationProfileListCreate.as_view(), name='medication-profile'),
+    path('medication-profile/<int:pk>/', MedicationProfileDelete.as_view(), name='medication-profile-delete'),
+    path('medication-profile/check/', check_against_profile, name='check-against-profile'),
+    path('medication-profile/scan/', scan_prescription, name='scan-prescription'),
+]

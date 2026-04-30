@@ -25,6 +25,7 @@ const Interactions = () => {
     const [results, setResults] = useState(null);
     const [analyzing, setAnalyzing] = useState(false);
     const [searching, setSearching] = useState(false);
+    const [selectedLanguage, setSelectedLanguage] = useState("darija");
 
     // Fetch drug suggestions from backend
     useEffect(() => {
@@ -84,122 +85,147 @@ const Interactions = () => {
 
     return (
         <div className="max-w-7xl mx-auto py-12 px-6 animate-in fade-in duration-700">
-            <div className="flex flex-col items-center text-center mb-16 pt-8">
-
-                <h1 className="text-5xl font-extrabold tracking-tight text-slate-900 mb-6 sm:text-6xl lg:text-7xl leading-[1.1]">
-                    Verify Your <span className="text-bleu-900">Medications</span>
+            {/* Minimalist Apple-Style Header in a Box */}
+            <div className="mb-14 p-10 md:p-12 bg-blue-50/50 dark:bg-blue-900/10 border border-blue-100/50 dark:border-blue-900/20 rounded-[2rem] text-center max-w-4xl mx-auto shadow-sm">
+                <h1 className="text-3xl sm:text-4xl font-semibold text-slate-900 tracking-tight mb-4">
+                    Clinical Interaction Analysis.
                 </h1>
-                <p className="text-xl text-slate-500 max-w-2xl font-medium leading-relaxed">
-                    Check drug interactions against <span className="text-slate-900 font-bold">236,000+</span> clinical records.
-                    Simplified explanations in <span className="text-primary font-bold">Algerian Darija</span>.
+                
+                <p className="text-base text-slate-500 leading-relaxed mb-8 max-w-2xl mx-auto">
+                    Cross-reference patient medication regimens against over 236,000 clinical records. Evidence-based risk assessments with multi-lingual patient explanations.
                 </p>
+
+                <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 text-sm text-slate-500 font-medium">
+                    <div className="flex items-center gap-2">
+                        <Activity className="w-4 h-4 text-blue-400" />
+                        <span>Real-time Sync</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                        <ShieldCheck className="w-4 h-4 text-blue-400" />
+                        <span>DDInter Verified</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                        <Languages className="w-4 h-4 text-blue-400" />
+                        <span>Multi-Lingual</span>
+                    </div>
+                </div>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
                 {/* Left Column: Input */}
-                <div className="lg:col-span-1 space-y-6">
-                    <Card className="border-slate-100 shadow-xl shadow-slate-200/40 rounded-2xl overflow-hidden bg-white/50 backdrop-blur-sm">
-                        <CardHeader className="bg-slate-50/80 pb-5 border-b border-slate-100">
-                            <CardTitle className="text-lg font-bold flex items-center gap-2.5">
-                                <div className="p-2 bg-primary/10 rounded-lg">
-                                    <Search className="w-4 h-4 text-primary" />
+                <div className="lg:col-span-1 space-y-4">
+                    <div className="bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl shadow-sm overflow-hidden">
+                        {/* Header */}
+                        <div className="px-5 py-4 border-b border-zinc-100 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-900/50">
+                            <div className="flex items-center gap-3">
+                                <div className="p-2 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 rounded-lg border border-blue-100 dark:border-blue-800/30">
+                                    <Search className="w-4 h-4" />
                                 </div>
-                                Add Medications
-                            </CardTitle>
-                            <CardDescription className="text-slate-500 font-medium">Search by generic or brand name</CardDescription>
-                        </CardHeader>
-                        <CardContent className="pt-6">
+                                <div>
+                                    <h2 className="text-sm font-semibold text-zinc-900 dark:text-zinc-50">Add Medications</h2>
+                                    <p className="text-xs text-zinc-500 dark:text-zinc-400">Search by generic or brand name</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Content */}
+                        <div className="p-5">
+                            {/* Search Input */}
                             <div className="relative group">
-                                <Input
+                                <input
+                                    type="text"
                                     placeholder="Search e.g. Doliprane..."
                                     value={searchTerm}
                                     onChange={(e) => setSearchTerm(e.target.value)}
-                                    className="pl-10 h-12 bg-slate-50/50 border-slate-200/60 focus:bg-white transition-all rounded-xl"
+                                    className="w-full pl-9 pr-3 h-10 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-md text-sm text-zinc-900 dark:text-zinc-50 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all shadow-sm"
                                 />
-                                <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-primary transition-colors" />
+                                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-400 group-focus-within:text-blue-500 transition-colors" />
 
                                 {suggestions.length > 0 && (
-                                    <div className="absolute z-50 w-full mt-2 bg-white border border-slate-100 rounded-2xl shadow-2xl overflow-hidden animate-in fade-in slide-in-from-top-2 ring-1 ring-black/5">
-                                        <div className="px-3 py-2 bg-slate-50 border-b border-slate-100 flex justify-between items-center">
-                                            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Suggestions</p>
-                                            {searching && <div className="w-3 h-3 border border-primary/30 border-t-primary rounded-full animate-spin"></div>}
+                                    <div className="absolute z-50 w-full mt-2 bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-lg shadow-xl overflow-hidden ring-1 ring-black/5">
+                                        <div className="px-3 py-2 bg-zinc-50/80 dark:bg-zinc-900/80 border-b border-zinc-100 dark:border-zinc-800 flex justify-between items-center">
+                                            <p className="text-[10px] font-semibold text-zinc-500 uppercase tracking-widest">Suggestions</p>
+                                            {searching && <div className="w-3 h-3 border border-blue-500/30 border-t-blue-500 rounded-full animate-spin"></div>}
                                         </div>
-                                        {suggestions.map((drug, index) => (
-                                            <button
-                                                key={drug.registration_number || index}
-                                                onClick={() => addDrug(drug)}
-                                                className="w-full text-left px-4 py-3.5 hover:bg-primary/5 flex items-center justify-between group transition-colors border-b border-slate-50 last:border-none"
-                                            >
-                                                <div className="max-w-[80%]">
-                                                    <p className="font-bold text-sm text-slate-900 group-hover:text-primary transition-colors truncate">{drug.brand_name || drug.generic_name}</p>
-                                                    <p className="text-[10px] text-slate-500 truncate">{drug.form} • {drug.dosage}</p>
-                                                </div>
-                                                <div className="w-7 h-7 rounded-lg bg-slate-50 group-hover:bg-primary group-hover:text-white flex items-center justify-center transition-all">
-                                                    <Plus className="w-4 h-4" />
-                                                </div>
-                                            </button>
-                                        ))}
+                                        <div className="max-h-52 overflow-y-auto py-1">
+                                            {suggestions.map((drug, index) => (
+                                                <button
+                                                    key={drug.registration_number || index}
+                                                    onClick={() => addDrug(drug)}
+                                                    className="w-full text-left px-3 py-2.5 hover:bg-zinc-50 dark:hover:bg-zinc-900 flex items-center justify-between group transition-colors"
+                                                >
+                                                    <div className="min-w-0 pr-3">
+                                                        <p className="font-medium text-sm text-zinc-900 dark:text-zinc-50 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors truncate">{drug.brand_name || drug.generic_name}</p>
+                                                        <p className="text-[10px] text-zinc-500 truncate mt-0.5">{drug.form} • {drug.dosage}</p>
+                                                    </div>
+                                                    <div className="w-6 h-6 rounded-md bg-zinc-100 dark:bg-zinc-800 group-hover:bg-blue-600 group-hover:text-white flex items-center justify-center transition-all shrink-0">
+                                                        <Plus className="w-3.5 h-3.5" />
+                                                    </div>
+                                                </button>
+                                            ))}
+                                        </div>
                                     </div>
                                 )}
                             </div>
 
-                            <div className="mt-8">
-                                <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">Selected List</h3>
+                            {/* Selected List Section */}
+                            <div className="mt-6">
+                                <h3 className="text-xs font-semibold text-zinc-900 dark:text-zinc-50 mb-3">
+                                    Selected Drugs <span className="text-zinc-400 font-normal">({selectedDrugs.length})</span>
+                                </h3>
+
                                 {selectedDrugs.length === 0 ? (
-                                    <div className="text-center py-10 px-4 border-2 border-dashed border-slate-100 rounded-2xl bg-slate-50/30">
-                                        <p className="text-[11px] font-bold text-slate-400 uppercase tracking-tight">No drugs added yet</p>
+                                    <div className="text-center py-8 px-4 border border-dashed border-zinc-200 dark:border-zinc-800 rounded-lg bg-zinc-50/50 dark:bg-zinc-900/20">
+                                        <p className="text-xs text-zinc-400">No drugs added yet</p>
                                     </div>
                                 ) : (
                                     <div className="space-y-2">
                                         {selectedDrugs.map((drug, index) => (
-                                            <div key={drug.registration_number || index} className="flex items-center justify-between p-3.5 bg-white rounded-xl border border-slate-100 shadow-sm animate-in zoom-in-95 duration-200">
-                                                <div className="max-w-[70%]">
-                                                    <p className="font-bold text-sm text-slate-900 truncate">{drug.brand_name || drug.generic_name}</p>
-                                                    <p className="text-[10px] text-slate-500 font-medium truncate">{drug.form}</p>
+                                            <div key={drug.registration_number || index} className="flex items-center justify-between px-3 py-2.5 bg-white dark:bg-zinc-950 rounded-md border border-zinc-200 dark:border-zinc-800 shadow-sm group hover:border-blue-200 dark:hover:border-blue-900 transition-all">
+                                                <div className="min-w-0 pr-2">
+                                                    <p className="font-medium text-sm text-zinc-900 dark:text-zinc-50 truncate">{drug.brand_name || drug.generic_name}</p>
+                                                    <p className="text-[10px] text-zinc-500 truncate mt-0.5">{drug.form}</p>
                                                 </div>
-                                                <Button
-                                                    variant="ghost"
-                                                    size="icon"
+                                                <button
                                                     onClick={() => removeDrug(drug.registration_number)}
-                                                    className="h-8 w-8 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg"
+                                                    className="p-1.5 text-zinc-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-md transition-all shrink-0"
                                                 >
-                                                    <Trash2 className="w-4 h-4" />
-                                                </Button>
+                                                    <Trash2 className="w-3.5 h-3.5" />
+                                                </button>
                                             </div>
                                         ))}
                                     </div>
                                 )}
                             </div>
 
-                            <div className="pt-6 border-t border-slate-100/60 mt-6">
-                                <Button
-                                    className="w-full h-12 font-bold text-sm rounded-xl shadow-xl shadow-primary/20 hover:shadow-primary/30 active:scale-[0.98] transition-all disabled:opacity-50 disabled:grayscale disabled:scale-100"
+                            {/* Action Button */}
+                            <div className="mt-6">
+                                <button
                                     disabled={selectedDrugs.length < 2 || analyzing}
                                     onClick={analyzeInteractions}
+                                    className="w-full h-10 bg-blue-600 text-white font-medium text-sm rounded-md shadow-sm hover:bg-blue-700 active:scale-[0.98] transition-all disabled:bg-zinc-100 dark:disabled:bg-zinc-800 disabled:text-zinc-400 disabled:shadow-none disabled:cursor-not-allowed flex items-center justify-center gap-2"
                                 >
                                     {analyzing ? (
-                                        <span className="flex items-center gap-2">
+                                        <>
                                             <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                                            Running Engine...
-                                        </span>
+                                            <span>Analyzing...</span>
+                                        </>
                                     ) : (
-                                        <span className="flex items-center gap-2">
+                                        <>
                                             <Activity className="w-4 h-4" />
-                                            Analyze Interactions
-                                        </span>
+                                            <span>Analyze Interactions</span>
+                                        </>
                                     )}
-                                </Button>
+                                </button>
                             </div>
-                        </CardContent>
-                    </Card>
+                        </div>
+                    </div>
 
-                    <div className="p-5 bg-blue-50/50 rounded-2xl border border-blue-100/60 shadow-sm">
-                        <div className="flex gap-3">
-                            <div className="p-1.5 bg-blue-100 rounded-lg h-fit">
-                                <Info className="w-4 h-4 text-blue-600 shrink-0" />
-                            </div>
-                            <p className="text-[11px] text-blue-800 font-medium leading-relaxed">
-                                <strong>Clinical Note:</strong> This tool uses the DDInter database. Results are for information only. Always consult a doctor.
+                    <div className="px-4 py-3 bg-blue-50/50 dark:bg-blue-900/10 rounded-lg border border-blue-100/60 dark:border-blue-900/30">
+                        <div className="flex gap-2">
+                            <Info className="w-4 h-4 text-blue-600 dark:text-blue-400 shrink-0 mt-0.5" />
+                            <p className="text-xs text-blue-800 dark:text-blue-300 leading-relaxed">
+                                <span className="font-semibold">Clinical Note:</span> This tool uses the DDInter database. Results are for information only. Always consult a doctor.
                             </p>
                         </div>
                     </div>
@@ -208,20 +234,52 @@ const Interactions = () => {
                 {/* Right Column: Results */}
                 <div className="lg:col-span-2 min-h-[500px]">
                     {!results && !analyzing && (
-                        <div className="h-full flex flex-col items-center justify-center text-center p-16 bg-slate-50/40 rounded-[2.5rem] border-2 border-dashed border-slate-200/60 transition-all hover:bg-slate-50/60 group">
-                            <div className="relative mb-8">
-                                <div className="absolute -inset-4 bg-primary/5 rounded-full blur-2xl group-hover:bg-primary/10 transition-all"></div>
-                                <div className="relative w-24 h-24 bg-white rounded-3xl shadow-2xl shadow-slate-200/50 flex items-center justify-center border border-slate-50">
-                                    <ShieldCheck className="w-12 h-12 text-primary/30 group-hover:text-primary/50 transition-colors" />
+                        <div className="h-full bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-8 flex flex-col justify-center shadow-sm">
+                            <div className="max-w-2xl mx-auto space-y-8 w-full">
+                                <div className="border-b border-zinc-100 dark:border-zinc-800 pb-6 mb-6 flex items-start gap-4">
+                                    <div className="p-3 bg-zinc-50 dark:bg-zinc-900 text-zinc-400 rounded-xl shrink-0 border border-zinc-100 dark:border-zinc-800">
+                                        <ShieldCheck className="w-6 h-6" />
+                                    </div>
+                                    <div>
+                                        <h3 className="text-lg font-semibold text-zinc-900 dark:text-zinc-50">Interaction Analysis Engine</h3>
+                                        <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-1.5 leading-relaxed">
+                                            Search and select at least two medications to evaluate their potential clinical interactions. Our engine cross-references the DDInter database containing over 236,000 documented drug-drug interactions.
+                                        </p>
+                                    </div>
                                 </div>
-                                <div className="absolute -bottom-2 -right-2 w-10 h-10 bg-primary text-white rounded-2xl flex items-center justify-center shadow-lg animate-bounce">
-                                    <Plus className="w-6 h-6" />
+
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <div className="p-5 bg-red-50/50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30 rounded-xl">
+                                        <h4 className="text-sm font-bold text-red-700 dark:text-red-400 flex items-center gap-2 mb-2">
+                                            <span className="w-2 h-2 rounded-full bg-red-500"></span>
+                                            Major Interaction
+                                        </h4>
+                                        <p className="text-xs text-red-600/80 dark:text-red-300/80 leading-relaxed">
+                                            Highly clinically significant. Risk of dangerous adverse effects or therapeutic failure. Avoid combination if possible or monitor strictly.
+                                        </p>
+                                    </div>
+
+                                    <div className="p-5 bg-yellow-50/50 dark:bg-yellow-900/10 border border-yellow-100 dark:border-yellow-900/30 rounded-xl">
+                                        <h4 className="text-sm font-bold text-yellow-700 dark:text-yellow-400 flex items-center gap-2 mb-2">
+                                            <span className="w-2 h-2 rounded-full bg-yellow-500"></span>
+                                            Moderate Interaction
+                                        </h4>
+                                        <p className="text-xs text-yellow-600/80 dark:text-yellow-300/80 leading-relaxed">
+                                            Moderately clinically significant. Usually requires dosage adjustments, altered timing of administration, or close clinical monitoring.
+                                        </p>
+                                    </div>
+
+                                    <div className="p-5 bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 rounded-xl sm:col-span-2">
+                                        <h4 className="text-sm font-bold text-zinc-700 dark:text-zinc-300 flex items-center gap-2 mb-2">
+                                            <span className="w-2 h-2 rounded-full bg-zinc-400"></span>
+                                            Minor Interaction
+                                        </h4>
+                                        <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                                            Minimal clinical significance. May cause minor effects but typically does not require a change in therapy. Standard monitoring is advised.
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
-                            <h3 className="text-2xl font-extrabold text-slate-900 mb-3">Ready to Analyze</h3>
-                            <p className="text-slate-500 max-w-sm font-medium leading-relaxed">
-                                Add at least two medications to the list on the left to start checking for potential clinical interactions.
-                            </p>
                         </div>
                     )}
 
@@ -243,81 +301,122 @@ const Interactions = () => {
 
                     {results && (
                         <div className="space-y-6 animate-in slide-in-from-bottom-6 duration-700">
-                            <div className="flex items-center justify-between px-2">
-                                <h3 className="text-2xl font-bold text-slate-900">Analysis Results</h3>
-                                <Badge variant="secondary" className="bg-white border border-slate-100 text-slate-600 px-4 py-1 rounded-full font-bold shadow-sm">
-                                    {results.explained_pairs?.length || 0} pairs analyzed
-                                </Badge>
+                            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 px-2">
+                                <div className="flex items-center gap-3">
+                                    <h3 className="text-2xl font-bold text-slate-900">Analysis Results</h3>
+                                    <Badge variant="secondary" className="bg-white border border-slate-100 text-slate-600 px-4 py-1 rounded-full font-bold shadow-sm">
+                                        {results.explained_pairs?.length || 0} pairs analyzed
+                                    </Badge>
+                                </div>
+
+                                <div className="flex bg-slate-100 p-1 rounded-xl w-fit self-end sm:self-auto">
+                                    <Button
+                                        variant="ghost"
+                                        size="sm"
+                                        onClick={() => setSelectedLanguage("darija")}
+                                        className={`h-8 px-4 text-[10px] font-bold rounded-lg transition-all ${selectedLanguage === "darija" ? "bg-white shadow-sm text-primary" : "text-slate-500 hover:text-slate-700"}`}
+                                    >
+                                        DARIJA
+                                    </Button>
+                                    <Button
+                                        variant="ghost"
+                                        size="sm"
+                                        onClick={() => setSelectedLanguage("french")}
+                                        className={`h-8 px-4 text-[10px] font-bold rounded-lg transition-all ${selectedLanguage === "french" ? "bg-white shadow-sm text-primary" : "text-slate-500 hover:text-slate-700"}`}
+                                    >
+                                        FRENCH
+                                    </Button>
+                                    <Button
+                                        variant="ghost"
+                                        size="sm"
+                                        onClick={() => setSelectedLanguage("english")}
+                                        className={`h-8 px-4 text-[10px] font-bold rounded-lg transition-all ${selectedLanguage === "english" ? "bg-white shadow-sm text-primary" : "text-slate-500 hover:text-slate-700"}`}
+                                    >
+                                        ENGLISH
+                                    </Button>
+                                </div>
                             </div>
 
                             <div className="grid grid-cols-1 gap-5">
                                 {results.explained_pairs?.map((res, idx) => (
-                                    <Card key={idx} className="overflow-hidden border-none shadow-xl shadow-slate-200/40 rounded-3xl ring-2 ring-slate-100" style={{ ringColor: res.color + '33' }}>
+                                    <div key={idx} className="bg-white dark:bg-zinc-950 overflow-hidden shadow-sm border border-zinc-200 dark:border-zinc-800 rounded-2xl transition-all" style={{ borderColor: res.color ? `${res.color}44` : undefined }}>
+                                        {/* Top Color Bar */}
                                         <div className="h-2 w-full" style={{ backgroundColor: res.color || '#94a3b8' }}></div>
-                                        <CardContent className="p-0">
-                                            <div className="p-7">
-                                                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 mb-8">
+                                        
+                                        <div>
+                                            <div className="p-6">
+                                                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
                                                     <div className="flex items-center gap-4">
-                                                        <div className="flex items-center bg-slate-50 p-1.5 rounded-2xl border border-slate-100">
-                                                            <div className="px-4 py-2 bg-white rounded-xl font-bold text-sm shadow-sm">{res.drug_a}</div>
+                                                        <div className="flex items-center bg-zinc-50 dark:bg-zinc-900 p-1.5 rounded-xl border border-zinc-200 dark:border-zinc-800">
+                                                            <div className="px-4 py-1.5 bg-white dark:bg-zinc-950 rounded-lg font-semibold text-sm shadow-sm">{res.drug_a}</div>
                                                             <div className="px-3">
-                                                                <Activity className="w-4 h-4 text-slate-300" />
+                                                                <Activity className="w-4 h-4 text-zinc-400" />
                                                             </div>
-                                                            <div className="px-4 py-2 bg-white rounded-xl font-bold text-sm shadow-sm">{res.drug_b}</div>
+                                                            <div className="px-4 py-1.5 bg-white dark:bg-zinc-950 rounded-lg font-semibold text-sm shadow-sm">{res.drug_b}</div>
                                                         </div>
                                                     </div>
 
-                                                    <Badge className="text-white border-none px-5 py-2 rounded-xl font-bold text-xs shadow-lg" style={{ backgroundColor: res.color || '#94a3b8' }}>
+                                                    <div className="text-white px-4 py-1.5 rounded-lg font-bold text-xs shadow-sm" style={{ backgroundColor: res.color || '#94a3b8' }}>
                                                         {res.level}
-                                                    </Badge>
+                                                    </div>
                                                 </div>
 
-                                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                                    <div className="p-6 bg-slate-50/80 rounded-[2rem] border border-slate-100/50">
-                                                        <div className="flex items-center gap-2 mb-4">
-                                                            <Languages className="w-4 h-4 text-primary" />
-                                                            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Explication en Darija</p>
+                                                <div className="grid grid-cols-1 gap-5">
+                                                    <div className="p-6 bg-zinc-50/80 dark:bg-zinc-900/50 rounded-2xl border border-zinc-100 dark:border-zinc-800 shadow-inner">
+                                                        <div className="flex items-center justify-between mb-4">
+                                                            <div className="flex items-center gap-2">
+                                                                <div className="p-1.5 bg-white dark:bg-zinc-950 rounded-lg shadow-sm">
+                                                                    <Languages className="w-4 h-4 text-blue-500" />
+                                                                </div>
+                                                                <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">
+                                                                    {selectedLanguage === "darija" ? "Explication en Darija" :
+                                                                        selectedLanguage === "french" ? "Explication en Français" :
+                                                                            "English Explanation"}
+                                                                </p>
+                                                            </div>
+                                                            <div className="p-1.5 bg-blue-50 dark:bg-blue-900/20 rounded-full">
+                                                                <Sparkles className="w-3 h-3 text-blue-500 animate-pulse" />
+                                                            </div>
                                                         </div>
-                                                        <p className="text-base font-bold text-slate-800 leading-relaxed text-right">
-                                                            "{res.darija_explanation}"
+
+                                                        <p
+                                                            className={`text-sm font-semibold text-zinc-800 dark:text-zinc-200 leading-relaxed ${selectedLanguage === "darija" ? "text-right" : "text-left"}`}
+                                                            dir={selectedLanguage === "darija" ? "rtl" : "ltr"}
+                                                        >
+                                                            "{selectedLanguage === "darija" ? res.darija_explanation :
+                                                                selectedLanguage === "french" ? res.french_explanation :
+                                                                    res.medical_explanation}"
                                                         </p>
-                                                        {res.darija_risk_label && (
-                                                            <div className="mt-3 flex justify-end">
-                                                                <Badge variant="outline" className="text-[10px] border-primary/20 text-primary bg-primary/5">{res.darija_risk_label}</Badge>
+
+                                                        {selectedLanguage === "darija" && res.darija_risk_label && (
+                                                            <div className="mt-4 flex justify-end">
+                                                                <div className="text-[10px] border border-blue-200 dark:border-blue-800 text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 px-3 py-1 rounded-full font-bold" dir="rtl">{res.darija_risk_label}</div>
                                                             </div>
                                                         )}
-                                                    </div>
-                                                    <div className="p-6 bg-slate-50/30 rounded-[2rem] border border-slate-100/30">
-                                                        <div className="flex items-center gap-2 mb-4">
-                                                            <Stethoscope className="w-4 h-4 text-slate-400" />
-                                                            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Medical Insight (BioMistral)</p>
-                                                        </div>
-                                                        <p className="text-sm font-medium text-slate-600 leading-relaxed">
-                                                            {res.medical_explanation}
-                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>
 
-                                            <div className="px-7 py-4 bg-slate-50/50 border-t border-slate-100/50 flex items-center justify-between">
+                                            {/* Footer */}
+                                            <div className="px-6 py-3.5 bg-zinc-50/50 dark:bg-zinc-900/30 border-t border-zinc-100 dark:border-zinc-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                                                 <div className="flex items-center gap-3">
                                                     <div className="p-1.5 rounded-lg" style={{ backgroundColor: (res.color || '#94a3b8') + '22' }}>
                                                         {res.level === 'DANGER' ? <AlertTriangle className="w-4 h-4" style={{ color: res.color }} /> :
                                                             res.level === 'CAUTION' ? <AlertCircle className="w-4 h-4" style={{ color: res.color }} /> :
                                                                 <CheckCircle className="w-4 h-4" style={{ color: res.color }} />}
                                                     </div>
-                                                    <span className="text-xs font-extrabold tracking-tight uppercase" style={{ color: res.color || '#94a3b8' }}>
+                                                    <span className="text-[11px] font-extrabold tracking-tight uppercase" style={{ color: res.color || '#94a3b8' }}>
                                                         {res.level === 'DANGER' ? 'CRITICAL RISK DETECTED' :
                                                             res.level === 'CAUTION' ? 'MODERATE PRECAUTION' :
                                                                 'PROCEED WITH CARE'}
                                                     </span>
                                                 </div>
-                                                <Button variant="ghost" size="sm" className="h-8 text-[11px] font-bold hover:bg-white rounded-lg transition-all active:scale-95">
+                                                <button className="h-8 px-3 text-[10px] font-bold text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-800 rounded-md transition-all active:scale-95">
                                                     REPORT INCIDENT
-                                                </Button>
+                                                </button>
                                             </div>
-                                        </CardContent>
-                                    </Card>
+                                        </div>
+                                    </div>
                                 ))}
                             </div>
                         </div>

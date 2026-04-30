@@ -58,8 +58,8 @@ class ChangePasswordSerializer(serializers.Serializer):
 class DrugSerializer(serializers.ModelSerializer):
     class Meta:
         model = Drug
-        fields = ['registration_number', 'code', 'generic_name', 'brand_name', 'form', 'dosage', 'packaging'] 
-        read_only_fields = ['registration_number', 'code', 'generic_name', 'brand_name', 'form', 'dosage', 'packaging']
+        fields = ['id', 'registration_number', 'code', 'generic_name', 'brand_name', 'form', 'dosage', 'packaging'] 
+        read_only_fields = ['id', 'registration_number', 'code', 'generic_name', 'brand_name', 'form', 'dosage', 'packaging']
 
         
         def validate(self, attrs):
@@ -78,4 +78,18 @@ class DrugSerializer(serializers.ModelSerializer):
             instance.packaging = validated_data.get('packaging', instance.packaging)
             instance.save()
             return instance
+
+
+class MedicationProfileSerializer(serializers.ModelSerializer):
+    drug = DrugSerializer(read_only=True)
+    drug_id = serializers.IntegerField(write_only=True)
+
+    class Meta:
+        model = MedicationProfile
+        fields = ['id', 'drug', 'drug_id', 'added_at', 'notes']
+        read_only_fields = ['id', 'added_at']
+
+    def create(self, validated_data):
+        validated_data['user'] = self.context['request'].user
+        return super().create(validated_data)
             
